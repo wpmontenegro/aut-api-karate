@@ -2,7 +2,6 @@
 Feature: User Management Example
 
   Background:
-    * configure ssl = true
     Given url baseUrl
 
   @GET @PATH_PARAMS
@@ -90,3 +89,17 @@ Feature: User Management Example
     Examples:
       | id |
       | 2  |
+
+  @GET @HEADER_TOKEN
+  Scenario Outline: Get information from an individual user with response success
+    Given path 'api/users/<id>'
+    * def login = call read("classpath:features/loginExample.feature")
+    * configure headers = { Authorization: '#(login.token)' }
+    When method GET
+    * karate.embed(response, 'Plain text')
+    Then status 200
+    * def schema = read("classpath:schemas/getSingleUserSchema.json")
+    * match $ == schema
+    Examples:
+      | id |
+      | 1  |
