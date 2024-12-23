@@ -2,12 +2,19 @@ function fn() {
   var env = karate.env; // get java system property 'karate.env'
   karate.log('karate.env system property was:', env);
 
+  // environments variables
+  var systemPath = java.lang.System.getenv('PATH');
+  var clientId = java.lang.System.getenv('AUTH0_CLIENT_ID');
+  var clientSecret = java.lang.System.getenv('AUTH0_CLIENT_SECRET');
+
   if (!env) {
     env = 'qa'; // a custom 'intelligent' default
   }
   var config = { // base config JSON
     baseUrl: "https://reqres.in/",
-    auth0Url: "https://dev-kjcagkyhdg5lkbmg.us.auth0.com"
+    auth0Url: "https://dev-kjcagkyhdg5lkbmg.us.auth0.com",
+    clientId: clientId,
+    clientSecret: clientSecret
   };
   if (env == 'dev') {
     // over-ride only those that need to be
