@@ -7,6 +7,7 @@ version = '1.0-SNAPSHOT'
 
 ext {
     karateVersion = '1.5.0'
+    fakerVersion = '2.4.2'
 }
 
 repositories {
@@ -15,6 +16,7 @@ repositories {
 
 dependencies {
     testImplementation "io.karatelabs:karate-junit5:${karateVersion}"
+    testImplementation "net.datafaker:datafaker:${fakerVersion}"
 }
 
 sourceSets {
