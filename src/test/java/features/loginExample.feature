@@ -1,14 +1,13 @@
-@REQRES
+@REQRES @ignore
 Feature: Token Management Example
 
   Background:
     Given url baseUrl
 
-  @LOGIN @ignore
+  @LOGIN
   Scenario: Login user with response success
     Given path '/api/login'
     * def body = read("classpath:templates/loginUserBody.json")
-    * print body
     And request body
     When method POST
     * karate.embed(response, 'Plain text')

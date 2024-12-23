@@ -1,0 +1,6 @@
+{
+  "client_id": "#(clientId)",
+  "client_secret": "#(clientSecret)",
+  "audience": "#(audience)",
+  "grant_type": "#(grantType)"
+}

@@ -10,8 +10,7 @@ Feature: User Management Example
     When method GET
     * karate.embed(response, 'Plain text')
     Then status 200
-    * def schema = read("classpath:schemas/getSingleUserSchema.json")
-    * match $ == schema
+    * match $ == read("classpath:schemas/getSingleUserSchema.json")
     * def expected = read("classpath:expected/getSingleUserExpected.json")
     * set expected.data = {id: <id>, email: '<email>', first_name: '<first_name>',last_name: '<last_name>', avatar: '<avatar>'}
     * match $ == expected
@@ -26,8 +25,7 @@ Feature: User Management Example
     When method GET
     * karate.embed(response, 'Plain text')
     Then status 200
-    * def schema = read("classpath:schemas/getUsersSchema.json")
-    * match $ == schema
+    * match $ == read("classpath:schemas/getUsersSchema.json")
     * def expected = read("classpath:expected/getUsersExpected.json")
     * set expected
       | path        | value         |
@@ -52,10 +50,8 @@ Feature: User Management Example
     When method POST
     * karate.embed(response, 'Plain text')
     Then status 201
-    * def schema = read("classpath:schemas/postUserSchema.json")
-    * match $ == schema
-    * def expected = {name: <name>, job: '<job>'}
-    * match $ contains expected
+    * match $ == read("classpath:schemas/postUserSchema.json")
+    * match $ contains {name: <name>, job: '<job>'}
     Examples:
       | name     | job    |
       | morpheus | leader |
@@ -71,10 +67,8 @@ Feature: User Management Example
     When method PUT
     * karate.embed(response, 'Plain text')
     Then status 200
-    * def schema = read("classpath:schemas/putUserSchema.json")
-    * match $ == schema
-    * def expected = {name: <name>, job: '<job>'}
-    * match $ contains expected
+    * match $ == read("classpath:schemas/putUserSchema.json")
+    * match $ contains {name: <name>, job: '<job>'}
     Examples:
       | id | name     | job           |
       | 2  | morpheus | zion resident |
@@ -93,13 +87,12 @@ Feature: User Management Example
   @GET @HEADER_TOKEN
   Scenario Outline: Get information from an individual user with response success
     Given path 'api/users/<id>'
-    * def login = call read("classpath:features/loginExample.feature")
+    * def login = call read("loginExample.feature")
     * configure headers = { Authorization: '#(login.token)' }
     When method GET
     * karate.embed(response, 'Plain text')
     Then status 200
-    * def schema = read("classpath:schemas/getSingleUserSchema.json")
-    * match $ == schema
+    * match $ == read("classpath:schemas/getSingleUserSchema.json")
     Examples:
       | id |
       | 1  |
