@@ -11,15 +11,58 @@ Feature: User Management with third integration Example
     * def body = read("classpath:templates/postUserBody.json")
     * set body.name = auht0.userName
     * set body.job = "<job>"
-    * print body
     And request body
     When method POST
     * karate.embed(response, 'Plain text')
     Then status 201
-    * def schema = read("classpath:schemas/postUserSchema.json")
-    * match $ == schema
-    * def expected = {name: '#(auht0.userName)', job: '<job>'}
-    * match $ contains expected
+    * match $ == read("classpath:schemas/postUserSchema.json")
+    * match $ contains {name: '#(auht0.userName)', job: '<job>'}
     Examples:
       | email                         | job    |
       | williammontenegro4d@gmail.com | leader |
+
+  @POST @CALL_MAILSAC
+  Scenario Outline: Create user with Mailsac as intermediate
+    Given path 'api/users'
+    * def mailsac = call read("integrations/mailsacExample.feature") {email: '<email>'}
+    * def body = read("classpath:templates/postUserBody.json")
+    * set body.name = mailsac.name
+    * set body $.message = mailsac.message
+    * set body.job = "<job>"
+    And request body
+    When method POST
+    * karate.embed(response, 'Plain text')
+    Then status 201
+    * match $ == read("classpath:schemas/postUserSchema.json")
+    * match $ contains {name: '#(mailsac.name)', message: '#(mailsac.message)', job: '<job>'}
+    Examples:
+      | email            | job    |
+      | pazd@mailsac.com | tester |
+
+  @POST @CSV_OUTLINE
+  Scenario Outline: Create multiples user with information from csv
+    Given path 'api/users'
+    * def body = read("classpath:templates/postUserBody.json")
+    * set body.name = "<name>"
+    * set body.job = "<job>"
+    And request body
+    When method POST
+    * karate.embed(response, 'Plain text')
+    Then status 201
+    * match $ contains {name: '#(name)', job: '#(job)'}
+    Examples:
+      | read('classpath:data/usersInfo.csv') |
+
+  @POST @CSV_FILTER
+  Scenario: Create user with filter from csv
+    Given path 'api/users'
+    * def csv = read('classpath:data/usersInfo.csv')
+    * def user = get[0] csv[?(@.filter=='true')]
+    * def body = read("classpath:templates/postUserBody.json")
+    * set body.name = user.name
+    * set body.job = user.job
+    And request body
+    When method POST
+    * karate.embed(response, 'Plain text')
+    Then status 201
+    * match $ contains {name: '#(user.name)', job: '#(user.job)'}

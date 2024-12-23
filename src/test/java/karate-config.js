@@ -5,6 +5,7 @@ function fn() {
   // environments variables
   var clientId = java.lang.System.getenv('AUTH0_CLIENT_ID');
   var clientSecret = java.lang.System.getenv('AUTH0_CLIENT_SECRET');
+  var apiKey = java.lang.System.getenv('MAILSAC_API_KEY');
 
   if (!env) {
     env = 'qa'; // a custom 'intelligent' default
@@ -12,8 +13,10 @@ function fn() {
   var config = { // base config JSON
     baseUrl: "https://reqres.in/",
     auth0Url: "https://dev-kjcagkyhdg5lkbmg.us.auth0.com",
+    mailsacUrl: "https://mailsac.com/api/",
     clientId: clientId,
-    clientSecret: clientSecret
+    clientSecret: clientSecret,
+    apiKey: apiKey
   };
   if (env == 'dev') {
     // over-ride only those that need to be

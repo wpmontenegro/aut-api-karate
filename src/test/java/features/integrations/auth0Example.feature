@@ -12,7 +12,6 @@ Feature: Api Auth0 Example
     * set body.client_secret = clientSecret
     * set body.audience = auth0Url + "/api/v2/"
     * set body.grant_type = "client_credentials"
-    * print body
     And request body
     When method POST
     * def authorization = response.token_type + " " + response.access_token
