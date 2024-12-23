@@ -3,7 +3,6 @@ function fn() {
   karate.log('karate.env system property was:', env);
 
   // environments variables
-  var systemPath = java.lang.System.getenv('PATH');
   var clientId = java.lang.System.getenv('AUTH0_CLIENT_ID');
   var clientSecret = java.lang.System.getenv('AUTH0_CLIENT_SECRET');
 

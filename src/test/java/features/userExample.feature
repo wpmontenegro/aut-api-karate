@@ -93,7 +93,7 @@ Feature: User Management Example
   @GET @HEADER_TOKEN
   Scenario Outline: Get information from an individual user with response success
     Given path 'api/users/<id>'
-    * def login = call read("classpath:features/loginExample.feature")
+    * def login = call read("loginExample.feature")
     * configure headers = { Authorization: '#(login.token)' }
     When method GET
     * karate.embed(response, 'Plain text')

@@ -7,7 +7,7 @@ Feature: User Management with third integration Example
   @POST @CALL_AUTH0
   Scenario Outline: Create user with Auth0 as intermediate
     Given path 'api/users'
-    * def auht0 = call read("classpath:features/auth0Example.feature@USER") {email: '<email>'}
+    * def auht0 = call read("integrations/auth0Example.feature@USER") {email: '<email>'}
     * def body = read("classpath:templates/postUserBody.json")
     * set body.name = auht0.userName
     * set body.job = "<job>"

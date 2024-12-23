@@ -20,7 +20,7 @@ Feature: Api Auth0 Example
   @USER
   Scenario: Search user with Auth0 as intermediate
     Given path '/api/v2/users-by-email'
-    * def login = call read("classpath:features/auth0Example.feature@TOKEN")
+    * def login = call read("integrations/auth0Example.feature@TOKEN")
     * configure headers = { Authorization: '#(login.authorization)' }
     And param email = email
     When method GET
