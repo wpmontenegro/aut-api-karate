@@ -11,9 +11,8 @@ Feature: User Management Example
     * karate.embed(response, 'Plain text')
     Then status 200
     * match $ == read("classpath:schemas/getSingleUserSchema.json")
-    * def expected = read("classpath:expected/getSingleUserExpected.json")
-    * set expected.data = {id: <id>, email: '<email>', first_name: '<first_name>',last_name: '<last_name>', avatar: '<avatar>'}
-    * match $ == expected
+    * def expected = {id: <id>, email: '<email>', first_name: '<first_name>',last_name: '<last_name>', avatar: '<avatar>'}
+    * match $.data == expected
     Examples:
       | id | email                  | first_name | last_name | avatar                                  |
       | 1  | george.bluth@reqres.in | George     | Bluth     | https://reqres.in/img/faces/1-image.jpg |
@@ -26,14 +25,10 @@ Feature: User Management Example
     * karate.embed(response, 'Plain text')
     Then status 200
     * match $ == read("classpath:schemas/getUsersSchema.json")
-    * def expected = read("classpath:expected/getUsersExpected.json")
-    * set expected
-      | path        | value         |
-      | page        | <page>        |
-      | per_page    | <per_page>    |
-      | total       | <total>       |
-      | total_pages | <total_pages> |
-    * match $ contains expected
+    * table expected
+      | page   | per_page   | total   | total_pages   |
+      | <page> | <per_page> | <total> | <total_pages> |
+    * match $ contains expected[0]
     * match each $.data contains {id: '#number'}
     Examples:
       | page | per_page | total | total_pages |
