@@ -6,7 +6,7 @@ group = 'com.willoh.automation'
 version = '1.0-SNAPSHOT'
 
 ext {
-    karateVersion = '1.5.0'
+    karateVersion = '1.5.1'
     fakerVersion = '2.4.2'
 }
 
