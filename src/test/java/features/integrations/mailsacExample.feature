@@ -7,7 +7,7 @@ Feature: Api Mailsac Example
   @MESSAGE
   Scenario: Get message with Mailsac
     Given path 'addresses/' + email + '/messages'
-    * configure headers = { "Mailsac-Key": '#(apiKey)' }
+    * configure headers = { "Mailsac-Key": '#(mailsacApiKey)' }
     When method GET
     * def name = $.[0].savedBy
     * def message = $.[0].subject

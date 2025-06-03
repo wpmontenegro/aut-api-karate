@@ -3,6 +3,7 @@ Feature: User Management Example
 
   Background:
     Given url baseUrl
+    * configure headers = { 'x-api-key': '#(apiKey)' }
 
   @GET @PATH_PARAMS
   Scenario Outline: Get information from an individual user with response success

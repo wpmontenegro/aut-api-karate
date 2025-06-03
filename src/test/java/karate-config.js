@@ -5,7 +5,8 @@ function fn() {
   // environments variables
   var clientId = java.lang.System.getenv('AUTH0_CLIENT_ID');
   var clientSecret = java.lang.System.getenv('AUTH0_CLIENT_SECRET');
-  var apiKey = java.lang.System.getenv('MAILSAC_API_KEY');
+  var mailsacApiKey = java.lang.System.getenv('MAILSAC_API_KEY');
+  var apiKey = java.lang.System.getenv('API_KEY');
 
   if (!env) {
     env = 'qa'; // a custom 'intelligent' default
@@ -16,6 +17,7 @@ function fn() {
     mailsacUrl: "https://mailsac.com/api/",
     clientId: clientId,
     clientSecret: clientSecret,
+    mailsacApiKey: mailsacApiKey,
     apiKey: apiKey
   };
   if (env == 'dev') {

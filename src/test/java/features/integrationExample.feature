@@ -3,6 +3,7 @@ Feature: User Management with third integration Example
 
   Background:
     Given url baseUrl
+    * configure headers = { 'x-api-key': '#(apiKey)' }
 
   @POST @CALL_AUTH0
   Scenario Outline: Create user with Auth0 as intermediate
