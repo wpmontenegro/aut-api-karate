@@ -1,4 +1,5 @@
 {
+  "_meta": "#object",
   "name": "#string",
   "job": "#string",
   "message": "##string",

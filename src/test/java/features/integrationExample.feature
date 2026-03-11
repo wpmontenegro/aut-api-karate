@@ -37,8 +37,8 @@ Feature: User Management with third integration Example
     * match $ == read("classpath:schemas/postUserSchema.json")
     * match $ contains {name: '#(mailsac.name)', message: '#(mailsac.message)', job: '<job>'}
     Examples:
-      | email            | job    |
-      | pazd@mailsac.com | tester |
+      | email              | job    |
+      | tester@mailsac.com | tester |
 
   @POST @CSV_OUTLINE
   Scenario Outline: Create multiples user with information from csv
