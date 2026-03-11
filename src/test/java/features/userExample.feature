@@ -84,7 +84,7 @@ Feature: User Management Example
   Scenario Outline: Get information from an individual user with response success
     Given path 'api/users/<id>'
     * def login = call read("loginExample.feature")
-    * configure headers = { Authorization: '#(login.token)' }
+    And header Authorization = login.token
     When method GET
     * karate.embed(response, 'Plain text')
     Then status 200

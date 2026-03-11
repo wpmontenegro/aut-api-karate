@@ -1,4 +1,5 @@
 {
+  "_meta": "#object",
   "data": {
     "id": "#number",
     "email": "#string",
